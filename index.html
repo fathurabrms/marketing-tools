@@ -1,0 +1,3843 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Marketing Tool - CargoMii</title>
+
+    <!-- ========================================================= -->
+    <!-- TAILWIND CSS -->
+    <!-- ========================================================= -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ========================================================= -->
+    <!-- LUCIDE ICONS -->
+    <!-- ========================================================= -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- ========================================================= -->
+    <!-- INTER FONT -->
+    <!-- ========================================================= -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ========================================================= -->
+    <!-- TAILWIND CONFIG -->
+    <!-- ========================================================= -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+
+                    colors: {
+
+                        cargomii: {
+
+                            navy: "#071B3A",
+
+                            blue: "#0757B8",
+
+                            green: "#4BC51B",
+
+                            ink: "#0B1220",
+
+                            mist: "#F5F8FC",
+
+                            soft: "#EEF4FB"
+
+                        }
+
+                    },
+
+                    boxShadow: {
+
+                        card: "0 4px 20px rgba(7, 27, 58, 0.05)",
+
+                        soft: "0 10px 35px rgba(7, 27, 58, 0.08)"
+
+                    }
+
+                }
+            }
+        };
+    </script>
+
+
+    <!-- ========================================================= -->
+    <!-- CUSTOM CSS -->
+    <!-- ========================================================= -->
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: "Inter", sans-serif;
+
+            background: #F5F8FC;
+
+            color: #0B1220;
+
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
+
+        .sidebar {
+
+            background:
+                radial-gradient(
+                    circle at 0% 0%,
+                    rgba(7, 87, 184, 0.35),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 100% 100%,
+                    rgba(75, 197, 27, 0.07),
+                    transparent 28%
+                ),
+                #071B3A;
+
+        }
+
+
+        /* =========================================================
+           NAV BUTTON
+        ========================================================= */
+
+        .nav-btn {
+
+            position: relative;
+
+            transition:
+                background-color .2s ease,
+                color .2s ease,
+                transform .2s ease;
+
+        }
+
+
+        .nav-btn:not(.active):hover {
+
+            background: rgba(255,255,255,.07);
+
+            color: white;
+
+            transform: translateX(2px);
+
+        }
+
+
+        /* ACTIVE MENU */
+
+        .nav-btn.active {
+
+            background: #0757B8 !important;
+
+            color: #FFFFFF !important;
+
+            box-shadow:
+                0 8px 20px rgba(7,87,184,.22);
+
+        }
+
+
+        .nav-btn.active::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 9px;
+
+            bottom: 9px;
+
+            width: 3px;
+
+            border-radius: 0 5px 5px 0;
+
+            background: #4BC51B;
+
+        }
+
+
+        .nav-btn.active .nav-icon {
+
+            background: rgba(255,255,255,.16) !important;
+
+            color: #FFFFFF !important;
+
+        }
+
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
+
+        .tab-content {
+
+            animation: fadeIn .22s ease;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(5px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================================================
+           INPUT
+        ========================================================= */
+
+        .input-modern {
+
+            transition:
+
+                border-color .2s ease,
+
+                box-shadow .2s ease,
+
+                background-color .2s ease;
+
+        }
+
+
+        .input-modern:focus {
+
+            border-color: #0757B8;
+
+            background: #FFFFFF;
+
+            box-shadow:
+                0 0 0 4px rgba(7,87,184,.08);
+
+        }
+
+
+        /* =========================================================
+           BUTTON
+        ========================================================= */
+
+        .primary-btn {
+
+            transition:
+
+                background-color .2s ease,
+
+                transform .2s ease,
+
+                box-shadow .2s ease;
+
+        }
+
+
+        .primary-btn:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px rgba(7,87,184,.18);
+
+        }
+
+
+        .green-btn {
+
+            transition:
+
+                background-color .2s ease,
+
+                transform .2s ease,
+
+                box-shadow .2s ease;
+
+        }
+
+
+        .green-btn:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px rgba(75,197,27,.20);
+
+        }
+
+
+        /* =========================================================
+           STAT CARD
+        ========================================================= */
+
+        .stat-card {
+
+            transition:
+
+                transform .2s ease,
+
+                box-shadow .2s ease;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(7,27,58,.08);
+
+        }
+
+
+        /* =========================================================
+           TABLE
+        ========================================================= */
+
+        .table-row {
+
+            transition: background-color .15s ease;
+
+        }
+
+
+        .table-row:hover {
+
+            background: #F8FAFC;
+
+        }
+
+
+        /* =========================================================
+           SCROLLBAR
+        ========================================================= */
+
+        .custom-scrollbar::-webkit-scrollbar {
+
+            width: 7px;
+
+            height: 7px;
+
+        }
+
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+
+            background: transparent;
+
+        }
+
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+
+            background: #CBD5E1;
+
+            border-radius: 999px;
+
+        }
+
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+
+            background: #94A3B8;
+
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 767px) {
+
+            .mobile-nav {
+
+                display: flex;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ============================================================= -->
+<!-- APP -->
+<!-- ============================================================= -->
+
+<div class="flex min-h-screen">
+
+
+    <!-- ========================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================================================= -->
+
+    <aside
+        class="
+            sidebar
+            hidden
+            md:flex
+            w-[270px]
+            flex-shrink-0
+            h-screen
+            sticky
+            top-0
+            flex-col
+            text-white
+            border-r
+            border-white/10
+        "
+    >
+
+
+        <!-- BRAND -->
+        <div class="px-6 pt-7 pb-6">
+
+            <div class="flex items-center gap-3">
+
+
+                <!-- LOGO MARK -->
+
+                <div
+                    class="
+                        w-11
+                        h-11
+                        rounded-xl
+                        bg-white
+                        flex
+                        items-center
+                        justify-center
+                        shadow-lg
+                    "
+                >
+
+                    <div
+                        class="
+                            w-7
+                            h-7
+                            rounded-lg
+                            bg-cargomii-navy
+                            flex
+                            items-center
+                            justify-center
+                            relative
+                        "
+                    >
+
+                        <span
+                            class="
+                                text-white
+                                text-base
+                                font-bold
+                            "
+                        >
+                            C
+                        </span>
+
+                        <span
+                            class="
+                                absolute
+                                -right-1
+                                -bottom-1
+                                w-2.5
+                                h-2.5
+                                rounded-full
+                                bg-cargomii-green
+                                border-2
+                                border-white
+                            "
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BRAND TEXT -->
+
+                <div>
+
+                    <h1
+                        class="
+                            text-[18px]
+                            font-bold
+                            tracking-tight
+                        "
+                    >
+                        CargoMii
+                    </h1>
+
+                    <p
+                        class="
+                            text-[10px]
+                            text-white/45
+                            uppercase
+                            tracking-[.18em]
+                            mt-0.5
+                        "
+                    >
+                        Marketing Tool
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DIVIDER -->
+
+        <div class="mx-6 border-t border-white/10"></div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="px-4 pt-6 space-y-1.5">
+
+
+            <p
+                class="
+                    px-3
+                    mb-3
+                    text-[10px]
+                    font-bold
+                    text-white/35
+                    uppercase
+                    tracking-[.18em]
+                "
+            >
+                Workspace
+            </p>
+
+
+            <!-- ================================================= -->
+            <!-- DASHBOARD -->
+            <!-- ================================================= -->
+
+            <button
+                data-tab="dashboard"
+                class="
+                    nav-btn
+                    active
+                    w-full
+                    flex
+                    items-center
+                    gap-3
+                    text-left
+                    px-3.5
+                    py-3
+                    rounded-xl
+                    text-white
+                    font-bold
+                    text-sm
+                "
+            >
+
+                <span
+                    class="
+                        nav-icon
+                        w-9
+                        h-9
+                        rounded-lg
+                        bg-white/15
+                        flex
+                        items-center
+                        justify-center
+                        flex-shrink-0
+                    "
+                >
+
+                    <i
+                        data-lucide="layout-dashboard"
+                        class="w-[17px] h-[17px]"
+                    ></i>
+
+                </span>
+
+
+                <span>
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <!-- ================================================= -->
+            <!-- TAMBAH DATA -->
+            <!-- ================================================= -->
+
+            <button
+                data-tab="tambah"
+                class="
+                    nav-btn
+                    w-full
+                    flex
+                    items-center
+                    gap-3
+                    text-left
+                    px-3.5
+                    py-3
+                    rounded-xl
+                    text-white/60
+                    hover:text-white
+                    font-medium
+                    text-sm
+                "
+            >
+
+                <span
+                    class="
+                        nav-icon
+                        w-9
+                        h-9
+                        rounded-lg
+                        bg-white/[.06]
+                        flex
+                        items-center
+                        justify-center
+                        flex-shrink-0
+                    "
+                >
+
+                    <i
+                        data-lucide="user-plus"
+                        class="w-[17px] h-[17px]"
+                    ></i>
+
+                </span>
+
+
+                <span>
+                    Tambah Data
+                </span>
+
+            </button>
+
+
+            <!-- ================================================= -->
+            <!-- DATA SAYA -->
+            <!-- ================================================= -->
+
+            <button
+                data-tab="data"
+                class="
+                    nav-btn
+                    w-full
+                    flex
+                    items-center
+                    gap-3
+                    text-left
+                    px-3.5
+                    py-3
+                    rounded-xl
+                    text-white/60
+                    hover:text-white
+                    font-medium
+                    text-sm
+                "
+            >
+
+                <span
+                    class="
+                        nav-icon
+                        w-9
+                        h-9
+                        rounded-lg
+                        bg-white/[.06]
+                        flex
+                        items-center
+                        justify-center
+                        flex-shrink-0
+                    "
+                >
+
+                    <i
+                        data-lucide="database"
+                        class="w-[17px] h-[17px]"
+                    ></i>
+
+                </span>
+
+
+                <span>
+                    Data Saya
+                </span>
+
+            </button>
+
+
+            <!-- ================================================= -->
+            <!-- FOLLOW UP -->
+            <!-- ================================================= -->
+
+            <button
+                data-tab="followup"
+                class="
+                    nav-btn
+                    w-full
+                    flex
+                    items-center
+                    gap-3
+                    text-left
+                    px-3.5
+                    py-3
+                    rounded-xl
+                    text-white/60
+                    hover:text-white
+                    font-medium
+                    text-sm
+                "
+            >
+
+                <span
+                    class="
+                        nav-icon
+                        w-9
+                        h-9
+                        rounded-lg
+                        bg-white/[.06]
+                        flex
+                        items-center
+                        justify-center
+                        flex-shrink-0
+                    "
+                >
+
+                    <i
+                        data-lucide="message-circle"
+                        class="w-[17px] h-[17px]"
+                    ></i>
+
+                </span>
+
+
+                <span>
+                    Follow Up
+                </span>
+
+
+                <span
+                    class="
+                        ml-auto
+                        w-5
+                        h-5
+                        rounded-full
+                        bg-cargomii-green
+                        text-cargomii-navy
+                        text-[10px]
+                        font-bold
+                        flex
+                        items-center
+                        justify-center
+                    "
+                >
+                    +
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- ================================================= -->
+        <!-- SIDEBAR BOTTOM -->
+        <!-- ================================================= -->
+
+        <div class="mt-auto p-5">
+
+
+            <div
+                class="
+                    rounded-2xl
+                    bg-white/[.055]
+                    border
+                    border-white/10
+                    p-4
+                "
+            >
+
+                <div class="flex items-center gap-3">
+
+
+                    <div
+                        class="
+                            w-9
+                            h-9
+                            rounded-lg
+                            bg-cargomii-green/15
+                            text-cargomii-green
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
+
+                        <i
+                            data-lucide="truck"
+                            class="w-[18px] h-[18px]"
+                        ></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p class="text-xs font-bold">
+                            CargoMii
+                        </p>
+
+                        <p
+                            class="
+                                text-[10px]
+                                text-white/40
+                                mt-1
+                                leading-relaxed
+                            "
+                        >
+                            Solusi cargo & logistik Indonesia.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ========================================================= -->
+    <!-- MAIN -->
+    <!-- ========================================================= -->
+
+    <main class="flex-1 min-w-0">
+
+
+        <!-- ===================================================== -->
+        <!-- HEADER -->
+        <!-- ===================================================== -->
+
+        <header
+            class="
+                h-[76px]
+                bg-white
+                border-b
+                border-slate-200
+                px-5
+                lg:px-8
+                flex
+                items-center
+                justify-between
+                sticky
+                top-0
+                z-30
+            "
+        >
+
+
+            <!-- LEFT -->
+
+            <div class="flex items-center gap-4">
+
+
+                <!-- MOBILE BRAND -->
+
+                <div
+                    class="
+                        md:hidden
+                        flex
+                        items-center
+                        gap-2.5
+                    "
+                >
+
+                    <div
+                        class="
+                            w-9
+                            h-9
+                            rounded-lg
+                            bg-cargomii-navy
+                            text-white
+                            flex
+                            items-center
+                            justify-center
+                            font-bold
+                        "
+                    >
+                        C
+                    </div>
+
+                    <div>
+
+                        <p
+                            class="
+                                text-sm
+                                font-bold
+                                text-cargomii-navy
+                            "
+                        >
+                            CargoMii
+                        </p>
+
+                        <p
+                            class="
+                                text-[9px]
+                                text-slate-400
+                                uppercase
+                                tracking-wider
+                            "
+                        >
+                            Marketing Tool
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hidden md:block">
+
+                    <p
+                        class="
+                            text-[11px]
+                            text-slate-400
+                            font-medium
+                        "
+                    >
+                        CargoMii Marketing
+                    </p>
+
+                    <h2
+                        class="
+                            text-lg
+                            font-bold
+                            text-cargomii-navy
+                            mt-0.5
+                        "
+                    >
+                        Marketing Dashboard
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="flex items-center gap-3">
+
+
+                <div
+                    class="
+                        hidden
+                        sm:flex
+                        items-center
+                        gap-2
+                        px-3
+                        py-2
+                        rounded-lg
+                        bg-slate-50
+                        border
+                        border-slate-100
+                    "
+                >
+
+                    <span
+                        class="
+                            w-2
+                            h-2
+                            rounded-full
+                            bg-cargomii-green
+                        "
+                    ></span>
+
+                    <span
+                        class="
+                            text-[11px]
+                            font-bold
+                            text-slate-500
+                        "
+                    >
+                        Sistem Aktif
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="
+                        w-9
+                        h-9
+                        rounded-full
+                        bg-cargomii-navy
+                        text-white
+                        flex
+                        items-center
+                        justify-center
+                        text-sm
+                        font-bold
+                    "
+                >
+                    M
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ===================================================== -->
+        <!-- CONTENT -->
+        <!-- ===================================================== -->
+
+        <div
+            class="
+                p-5
+                lg:p-8
+                max-w-[1500px]
+                mx-auto
+            "
+        >
+
+
+            <!-- ================================================= -->
+            <!-- DASHBOARD -->
+            <!-- ================================================= -->
+
+            <section
+                id="dashboard"
+                class="tab-content"
+            >
+
+
+                <!-- TITLE -->
+
+                <div class="mb-7">
+
+
+                    <div
+                        class="
+                            flex
+                            flex-col
+                            lg:flex-row
+                            lg:items-end
+                            lg:justify-between
+                            gap-4
+                        "
+                    >
+
+
+                        <div>
+
+
+                            <div
+                                class="
+                                    inline-flex
+                                    items-center
+                                    gap-2
+                                    px-3
+                                    py-1.5
+                                    rounded-full
+                                    bg-blue-50
+                                    border
+                                    border-blue-100
+                                    text-cargomii-blue
+                                    text-[10px]
+                                    font-bold
+                                    uppercase
+                                    tracking-wider
+                                    mb-3
+                                "
+                            >
+
+                                <i
+                                    data-lucide="bar-chart-3"
+                                    class="w-3.5 h-3.5"
+                                ></i>
+
+                                Overview
+
+                            </div>
+
+
+                            <h2
+                                class="
+                                    text-2xl
+                                    lg:text-3xl
+                                    font-bold
+                                    text-cargomii-navy
+                                    tracking-tight
+                                "
+                            >
+                                Dashboard
+                            </h2>
+
+
+                            <p
+                                class="
+                                    text-sm
+                                    text-slate-500
+                                    mt-1.5
+                                "
+                            >
+                                Atur profil marketing dan pantau target data customer Anda.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                hidden
+                                lg:flex
+                                items-center
+                                gap-2
+                                text-xs
+                                text-slate-400
+                            "
+                        >
+
+                            <i
+                                data-lucide="briefcase-business"
+                                class="w-4 h-4"
+                            ></i>
+
+                            Marketing Workspace
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- PROFILE -->
+                <!-- ================================================= -->
+
+                <div
+                    class="
+                        bg-white
+                        rounded-2xl
+                        border
+                        border-slate-200
+                        shadow-card
+                        p-5
+                        lg:p-6
+                        mb-6
+                    "
+                >
+
+
+                    <div
+                        class="
+                            flex
+                            items-center
+                            gap-3
+                            mb-6
+                        "
+                    >
+
+                        <div
+                            class="
+                                w-10
+                                h-10
+                                rounded-xl
+                                bg-blue-50
+                                text-cargomii-blue
+                                flex
+                                items-center
+                                justify-center
+                            "
+                        >
+
+                            <i
+                                data-lucide="user-round-cog"
+                                class="w-5 h-5"
+                            ></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3
+                                class="
+                                    font-bold
+                                    text-base
+                                    text-cargomii-navy
+                                "
+                            >
+                                Profil Marketing
+                            </h3>
+
+                            <p
+                                class="
+                                    text-xs
+                                    text-slate-400
+                                    mt-0.5
+                                "
+                            >
+                                Informasi marketing dan target pekerjaan.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="
+                            grid
+                            md:grid-cols-3
+                            gap-4
+                        "
+                    >
+
+
+                        <!-- NAMA -->
+
+                        <div>
+
+                            <label
+                                class="
+                                    block
+                                    text-xs
+                                    font-bold
+                                    text-slate-600
+                                    mb-2
+                                "
+                            >
+                                Nama Marketing
+                            </label>
+
+
+                            <div class="relative">
+
+                                <i
+                                    data-lucide="user"
+                                    class="
+                                        absolute
+                                        left-3.5
+                                        top-1/2
+                                        -translate-y-1/2
+                                        w-4
+                                        h-4
+                                        text-slate-400
+                                    "
+                                ></i>
+
+
+                                <input
+                                    id="marketingName"
+                                    type="text"
+                                    placeholder="Contoh: Fathur"
+                                    class="
+                                        input-modern
+                                        w-full
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        pl-10
+                                        pr-4
+                                        py-3
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                    "
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- NOMOR -->
+
+                        <div>
+
+                            <label
+                                class="
+                                    block
+                                    text-xs
+                                    font-bold
+                                    text-slate-600
+                                    mb-2
+                                "
+                            >
+                                Nomor Marketing
+                            </label>
+
+
+                            <div class="relative">
+
+                                <i
+                                    data-lucide="phone"
+                                    class="
+                                        absolute
+                                        left-3.5
+                                        top-1/2
+                                        -translate-y-1/2
+                                        w-4
+                                        h-4
+                                        text-slate-400
+                                    "
+                                ></i>
+
+
+                                <input
+                                    id="marketingPhone"
+                                    type="text"
+                                    placeholder="08123456789"
+                                    class="
+                                        input-modern
+                                        w-full
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        pl-10
+                                        pr-4
+                                        py-3
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                    "
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TARGET -->
+
+                        <div>
+
+                            <label
+                                class="
+                                    block
+                                    text-xs
+                                    font-bold
+                                    text-slate-600
+                                    mb-2
+                                "
+                            >
+                                Target Data
+                            </label>
+
+
+                            <div class="relative">
+
+                                <i
+                                    data-lucide="target"
+                                    class="
+                                        absolute
+                                        left-3.5
+                                        top-1/2
+                                        -translate-y-1/2
+                                        w-4
+                                        h-4
+                                        text-slate-400
+                                    "
+                                ></i>
+
+
+                                <input
+                                    id="marketingTarget"
+                                    type="number"
+                                    placeholder="Contoh: 100"
+                                    class="
+                                        input-modern
+                                        w-full
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        pl-10
+                                        pr-4
+                                        py-3
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                    "
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="saveProfileBtn"
+                        class="
+                            primary-btn
+                            mt-5
+                            inline-flex
+                            items-center
+                            justify-center
+                            gap-2
+                            px-5
+                            py-3
+                            rounded-xl
+                            bg-cargomii-blue
+                            hover:bg-cargomii-navy
+                            text-white
+                            font-bold
+                            text-sm
+                        "
+                    >
+
+                        <i
+                            data-lucide="save"
+                            class="w-4 h-4"
+                        ></i>
+
+                        Simpan Profil
+
+                    </button>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- STATS -->
+                <!-- ================================================= -->
+
+                <div
+                    class="
+                        grid
+                        grid-cols-1
+                        sm:grid-cols-2
+                        xl:grid-cols-4
+                        gap-4
+                        mb-6
+                    "
+                >
+
+
+                    <!-- TARGET -->
+
+                    <div
+                        class="
+                            stat-card
+                            bg-white
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            p-5
+                            shadow-card
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                items-start
+                                justify-between
+                            "
+                        >
+
+                            <div>
+
+                                <p
+                                    class="
+                                        text-[10px]
+                                        font-bold
+                                        text-slate-400
+                                        uppercase
+                                        tracking-wider
+                                    "
+                                >
+                                    Target
+                                </p>
+
+                                <h3
+                                    id="statTarget"
+                                    class="
+                                        text-3xl
+                                        font-bold
+                                        text-cargomii-navy
+                                        mt-2
+                                    "
+                                >
+                                    0
+                                </h3>
+
+                            </div>
+
+
+                            <div
+                                class="
+                                    w-10
+                                    h-10
+                                    rounded-xl
+                                    bg-blue-50
+                                    text-cargomii-blue
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+
+                                <i
+                                    data-lucide="target"
+                                    class="w-5 h-5"
+                                ></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                mt-4
+                                flex
+                                items-center
+                                gap-1.5
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-cargomii-blue
+                                "
+                            ></span>
+
+                            <span class="text-xs text-slate-400">
+                                Target marketing
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DATA -->
+
+                    <div
+                        class="
+                            stat-card
+                            bg-white
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            p-5
+                            shadow-card
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                items-start
+                                justify-between
+                            "
+                        >
+
+                            <div>
+
+                                <p
+                                    class="
+                                        text-[10px]
+                                        font-bold
+                                        text-slate-400
+                                        uppercase
+                                        tracking-wider
+                                    "
+                                >
+                                    Total Data
+                                </p>
+
+                                <h3
+                                    id="statData"
+                                    class="
+                                        text-3xl
+                                        font-bold
+                                        text-cargomii-navy
+                                        mt-2
+                                    "
+                                >
+                                    0
+                                </h3>
+
+                            </div>
+
+
+                            <div
+                                class="
+                                    w-10
+                                    h-10
+                                    rounded-xl
+                                    bg-slate-100
+                                    text-slate-600
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+
+                                <i
+                                    data-lucide="database"
+                                    class="w-5 h-5"
+                                ></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                mt-4
+                                flex
+                                items-center
+                                gap-1.5
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-slate-400
+                                "
+                            ></span>
+
+                            <span class="text-xs text-slate-400">
+                                Customer tersimpan
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOLLOW UP -->
+
+                    <div
+                        class="
+                            stat-card
+                            bg-white
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            p-5
+                            shadow-card
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                items-start
+                                justify-between
+                            "
+                        >
+
+                            <div>
+
+                                <p
+                                    class="
+                                        text-[10px]
+                                        font-bold
+                                        text-slate-400
+                                        uppercase
+                                        tracking-wider
+                                    "
+                                >
+                                    Sudah Follow Up
+                                </p>
+
+                                <h3
+                                    id="statFollowUp"
+                                    class="
+                                        text-3xl
+                                        font-bold
+                                        text-cargomii-navy
+                                        mt-2
+                                    "
+                                >
+                                    0
+                                </h3>
+
+                            </div>
+
+
+                            <div
+                                class="
+                                    w-10
+                                    h-10
+                                    rounded-xl
+                                    bg-green-50
+                                    text-cargomii-green
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+
+                                <i
+                                    data-lucide="send"
+                                    class="w-5 h-5"
+                                ></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                mt-4
+                                flex
+                                items-center
+                                gap-1.5
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-cargomii-green
+                                "
+                            ></span>
+
+                            <span class="text-xs text-slate-400">
+                                Customer dihubungi
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INTERESTED -->
+
+                    <div
+                        class="
+                            stat-card
+                            bg-white
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            p-5
+                            shadow-card
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                items-start
+                                justify-between
+                            "
+                        >
+
+                            <div>
+
+                                <p
+                                    class="
+                                        text-[10px]
+                                        font-bold
+                                        text-slate-400
+                                        uppercase
+                                        tracking-wider
+                                    "
+                                >
+                                    Tertarik
+                                </p>
+
+                                <h3
+                                    id="statInterested"
+                                    class="
+                                        text-3xl
+                                        font-bold
+                                        text-cargomii-navy
+                                        mt-2
+                                    "
+                                >
+                                    0
+                                </h3>
+
+                            </div>
+
+
+                            <div
+                                class="
+                                    w-10
+                                    h-10
+                                    rounded-xl
+                                    bg-emerald-50
+                                    text-emerald-600
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+
+                                <i
+                                    data-lucide="handshake"
+                                    class="w-5 h-5"
+                                ></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                mt-4
+                                flex
+                                items-center
+                                gap-1.5
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-emerald-500
+                                "
+                            ></span>
+
+                            <span class="text-xs text-slate-400">
+                                Customer potensial
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- PROGRESS -->
+                <!-- ================================================= -->
+
+                <div
+                    class="
+                        bg-white
+                        rounded-2xl
+                        border
+                        border-slate-200
+                        shadow-card
+                        p-5
+                        lg:p-6
+                    "
+                >
+
+                    <div
+                        class="
+                            flex
+                            items-center
+                            justify-between
+                            gap-4
+                            mb-4
+                        "
+                    >
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="
+                                    w-9
+                                    h-9
+                                    rounded-lg
+                                    bg-blue-50
+                                    text-cargomii-blue
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+
+                                <i
+                                    data-lucide="chart-no-axes-combined"
+                                    class="w-4 h-4"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3
+                                    class="
+                                        font-bold
+                                        text-sm
+                                        text-cargomii-navy
+                                    "
+                                >
+                                    Progress Target
+                                </h3>
+
+                                <p
+                                    class="
+                                        text-[11px]
+                                        text-slate-400
+                                        mt-0.5
+                                    "
+                                >
+                                    Pencapaian data customer
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            id="progressText"
+                            class="
+                                font-bold
+                                text-sm
+                                text-cargomii-blue
+                                whitespace-nowrap
+                            "
+                        >
+                            0 / 0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="
+                            w-full
+                            bg-slate-100
+                            rounded-full
+                            h-3
+                            overflow-hidden
+                        "
+                    >
+
+                        <div
+                            id="progressBar"
+                            class="
+                                bg-cargomii-blue
+                                h-3
+                                rounded-full
+                                transition-all
+                                duration-500
+                            "
+                            style="width: 0%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- TAMBAH DATA -->
+            <!-- ================================================= -->
+
+            <section
+                id="tambah"
+                class="tab-content hidden"
+            >
+
+
+                <div class="mb-7">
+
+
+                    <div
+                        class="
+                            inline-flex
+                            items-center
+                            gap-2
+                            px-3
+                            py-1.5
+                            rounded-full
+                            bg-blue-50
+                            border
+                            border-blue-100
+                            text-cargomii-blue
+                            text-[10px]
+                            font-bold
+                            uppercase
+                            tracking-wider
+                            mb-3
+                        "
+                    >
+
+                        <i
+                            data-lucide="user-plus"
+                            class="w-3.5 h-3.5"
+                        ></i>
+
+                        Customer
+
+                    </div>
+
+
+                    <h2
+                        class="
+                            text-2xl
+                            lg:text-3xl
+                            font-bold
+                            text-cargomii-navy
+                            tracking-tight
+                        "
+                    >
+                        Tambah Data
+                    </h2>
+
+
+                    <p
+                        class="
+                            text-sm
+                            text-slate-500
+                            mt-1.5
+                        "
+                    >
+                        Masukkan data calon customer untuk dikelola dan di-follow up.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="
+                        bg-white
+                        rounded-2xl
+                        border
+                        border-slate-200
+                        shadow-card
+                        p-5
+                        lg:p-7
+                        max-w-4xl
+                    "
+                >
+
+                    <form id="dataForm">
+
+
+                        <div
+                            class="
+                                flex
+                                items-center
+                                gap-3
+                                mb-7
+                            "
+                        >
+
+                            <div
+                                class="
+                                    w-10
+                                    h-10
+                                    rounded-xl
+                                    bg-blue-50
+                                    text-cargomii-blue
+                                    flex
+                                    items-center
+                                    justify-center
+                                "
+                            >
+
+                                <i
+                                    data-lucide="building-2"
+                                    class="w-5 h-5"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3
+                                    class="
+                                        font-bold
+                                        text-base
+                                        text-cargomii-navy
+                                    "
+                                >
+                                    Informasi Customer
+                                </h3>
+
+                                <p
+                                    class="
+                                        text-xs
+                                        text-slate-400
+                                        mt-0.5
+                                    "
+                                >
+                                    Lengkapi data perusahaan dan PIC.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                grid
+                                md:grid-cols-2
+                                gap-5
+                            "
+                        >
+
+
+                            <!-- COMPANY -->
+
+                            <div>
+
+                                <label
+                                    class="
+                                        block
+                                        text-xs
+                                        font-bold
+                                        text-slate-600
+                                        mb-2
+                                    "
+                                >
+                                    Nama Perusahaan *
+                                </label>
+
+
+                                <input
+                                    id="company"
+                                    type="text"
+                                    required
+                                    placeholder="Contoh: PT ABC"
+                                    class="
+                                        input-modern
+                                        w-full
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        px-4
+                                        py-3
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                    "
+                                >
+
+                            </div>
+
+
+                            <!-- PHONE -->
+
+                            <div>
+
+                                <label
+                                    class="
+                                        block
+                                        text-xs
+                                        font-bold
+                                        text-slate-600
+                                        mb-2
+                                    "
+                                >
+                                    Nomor WhatsApp *
+                                </label>
+
+
+                                <div class="relative">
+
+                                    <i
+                                        data-lucide="message-circle"
+                                        class="
+                                            absolute
+                                            left-3.5
+                                            top-1/2
+                                            -translate-y-1/2
+                                            w-4
+                                            h-4
+                                            text-slate-400
+                                        "
+                                    ></i>
+
+
+                                    <input
+                                        id="phone"
+                                        type="text"
+                                        required
+                                        placeholder="08123456789"
+                                        class="
+                                            input-modern
+                                            w-full
+                                            border
+                                            border-slate-200
+                                            rounded-xl
+                                            pl-10
+                                            pr-4
+                                            py-3
+                                            text-sm
+                                            bg-slate-50
+                                            outline-none
+                                        "
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- REGION -->
+
+                            <div>
+
+                                <label
+                                    class="
+                                        block
+                                        text-xs
+                                        font-bold
+                                        text-slate-600
+                                        mb-2
+                                    "
+                                >
+                                    Wilayah *
+                                </label>
+
+
+                                <div class="relative">
+
+                                    <i
+                                        data-lucide="map-pin"
+                                        class="
+                                            absolute
+                                            left-3.5
+                                            top-1/2
+                                            -translate-y-1/2
+                                            w-4
+                                            h-4
+                                            text-slate-400
+                                        "
+                                    ></i>
+
+
+                                    <input
+                                        id="region"
+                                        type="text"
+                                        required
+                                        placeholder="Jakarta Utara"
+                                        class="
+                                            input-modern
+                                            w-full
+                                            border
+                                            border-slate-200
+                                            rounded-xl
+                                            pl-10
+                                            pr-4
+                                            py-3
+                                            text-sm
+                                            bg-slate-50
+                                            outline-none
+                                        "
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PIC -->
+
+                            <div>
+
+                                <label
+                                    class="
+                                        block
+                                        text-xs
+                                        font-bold
+                                        text-slate-600
+                                        mb-2
+                                    "
+                                >
+                                    Nama PIC
+                                </label>
+
+
+                                <div class="relative">
+
+                                    <i
+                                        data-lucide="contact"
+                                        class="
+                                            absolute
+                                            left-3.5
+                                            top-1/2
+                                            -translate-y-1/2
+                                            w-4
+                                            h-4
+                                            text-slate-400
+                                        "
+                                    ></i>
+
+
+                                    <input
+                                        id="pic"
+                                        type="text"
+                                        placeholder="Nama PIC"
+                                        class="
+                                            input-modern
+                                            w-full
+                                            border
+                                            border-slate-200
+                                            rounded-xl
+                                            pl-10
+                                            pr-4
+                                            py-3
+                                            text-sm
+                                            bg-slate-50
+                                            outline-none
+                                        "
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="md:col-span-2">
+
+                                <label
+                                    class="
+                                        block
+                                        text-xs
+                                        font-bold
+                                        text-slate-600
+                                        mb-2
+                                    "
+                                >
+                                    Alamat
+                                </label>
+
+
+                                <textarea
+                                    id="address"
+                                    rows="3"
+                                    placeholder="Alamat perusahaan"
+                                    class="
+                                        input-modern
+                                        w-full
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        px-4
+                                        py-3
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                        resize-none
+                                    "
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- NOTES -->
+
+                            <div class="md:col-span-2">
+
+                                <label
+                                    class="
+                                        block
+                                        text-xs
+                                        font-bold
+                                        text-slate-600
+                                        mb-2
+                                    "
+                                >
+                                    Keterangan
+                                </label>
+
+
+                                <textarea
+                                    id="notes"
+                                    rows="3"
+                                    placeholder="Keterangan..."
+                                    class="
+                                        input-modern
+                                        w-full
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        px-4
+                                        py-3
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                        resize-none
+                                    "
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                mt-6
+                                pt-5
+                                border-t
+                                border-slate-100
+                                flex
+                                justify-end
+                            "
+                        >
+
+                            <button
+                                type="submit"
+                                class="
+                                    primary-btn
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    gap-2
+                                    px-6
+                                    py-3
+                                    bg-cargomii-blue
+                                    hover:bg-cargomii-navy
+                                    text-white
+                                    rounded-xl
+                                    font-bold
+                                    text-sm
+                                "
+                            >
+
+                                <i
+                                    data-lucide="check-circle-2"
+                                    class="w-4 h-4"
+                                ></i>
+
+                                Selesaikan Data
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- DATA SAYA -->
+            <!-- ================================================= -->
+
+            <section
+                id="data"
+                class="tab-content hidden"
+            >
+
+
+                <div class="mb-7">
+
+
+                    <div
+                        class="
+                            inline-flex
+                            items-center
+                            gap-2
+                            px-3
+                            py-1.5
+                            rounded-full
+                            bg-blue-50
+                            border
+                            border-blue-100
+                            text-cargomii-blue
+                            text-[10px]
+                            font-bold
+                            uppercase
+                            tracking-wider
+                            mb-3
+                        "
+                    >
+
+                        <i
+                            data-lucide="database"
+                            class="w-3.5 h-3.5"
+                        ></i>
+
+                        Database
+
+                    </div>
+
+
+                    <h2
+                        class="
+                            text-2xl
+                            lg:text-3xl
+                            font-bold
+                            text-cargomii-navy
+                            tracking-tight
+                        "
+                    >
+                        Data Saya
+                    </h2>
+
+
+                    <p
+                        class="
+                            text-sm
+                            text-slate-500
+                            mt-1.5
+                        "
+                    >
+                        Kelola seluruh data customer yang telah Anda masukkan.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="
+                        bg-white
+                        rounded-2xl
+                        border
+                        border-slate-200
+                        shadow-card
+                        overflow-hidden
+                    "
+                >
+
+
+                    <!-- TOOLBAR -->
+
+                    <div
+                        class="
+                            p-5
+                            border-b
+                            border-slate-100
+                            flex
+                            flex-col
+                            lg:flex-row
+                            gap-4
+                            justify-between
+                            lg:items-center
+                        "
+                    >
+
+                        <div>
+
+                            <h3
+                                class="
+                                    font-bold
+                                    text-sm
+                                    text-cargomii-navy
+                                "
+                            >
+                                Daftar Customer
+                            </h3>
+
+                            <p
+                                class="
+                                    text-xs
+                                    text-slate-400
+                                    mt-1
+                                "
+                            >
+                                Cari dan kelola data customer Anda.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                flex
+                                flex-col
+                                sm:flex-row
+                                gap-3
+                            "
+                        >
+
+
+                            <!-- SEARCH -->
+
+                            <div class="relative">
+
+                                <i
+                                    data-lucide="search"
+                                    class="
+                                        absolute
+                                        left-3.5
+                                        top-1/2
+                                        -translate-y-1/2
+                                        w-4
+                                        h-4
+                                        text-slate-400
+                                    "
+                                ></i>
+
+
+                                <input
+                                    id="searchInput"
+                                    type="text"
+                                    placeholder="Cari perusahaan..."
+                                    class="
+                                        input-modern
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        pl-10
+                                        pr-4
+                                        py-3
+                                        w-full
+                                        sm:w-72
+                                        text-sm
+                                        bg-slate-50
+                                        outline-none
+                                    "
+                                >
+
+                            </div>
+
+
+                            <!-- EXPORT -->
+
+                            <button
+                                id="exportBtn"
+                                class="
+                                    primary-btn
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    gap-2
+                                    px-5
+                                    py-3
+                                    bg-cargomii-blue
+                                    hover:bg-cargomii-navy
+                                    text-white
+                                    rounded-xl
+                                    font-bold
+                                    text-sm
+                                "
+                            >
+
+                                <i
+                                    data-lucide="download"
+                                    class="w-4 h-4"
+                                ></i>
+
+                                Export Excel
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TABLE -->
+
+                    <div class="overflow-x-auto custom-scrollbar">
+
+                        <table
+                            class="
+                                w-full
+                                text-sm
+                                min-w-[1000px]
+                            "
+                        >
+
+                            <thead>
+
+                                <tr
+                                    class="
+                                        bg-slate-50
+                                        border-b
+                                        border-slate-100
+                                        text-left
+                                    "
+                                >
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        No
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        Perusahaan
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        Nomor WhatsApp
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        Wilayah
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        PIC
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        Follow Up
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        Status
+                                    </th>
+
+
+                                    <th
+                                        class="
+                                            px-5
+                                            py-4
+                                            text-[10px]
+                                            font-bold
+                                            uppercase
+                                            tracking-wider
+                                            text-slate-400
+                                        "
+                                    >
+                                        Aksi
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="dataTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- FOLLOW UP -->
+            <!-- ================================================= -->
+
+            <section
+                id="followup"
+                class="tab-content hidden"
+            >
+
+
+                <div class="mb-7">
+
+
+                    <div
+                        class="
+                            inline-flex
+                            items-center
+                            gap-2
+                            px-3
+                            py-1.5
+                            rounded-full
+                            bg-blue-50
+                            border
+                            border-blue-100
+                            text-cargomii-blue
+                            text-[10px]
+                            font-bold
+                            uppercase
+                            tracking-wider
+                            mb-3
+                        "
+                    >
+
+                        <i
+                            data-lucide="message-circle-more"
+                            class="w-3.5 h-3.5"
+                        ></i>
+
+                        Communication
+
+                    </div>
+
+
+                    <h2
+                        class="
+                            text-2xl
+                            lg:text-3xl
+                            font-bold
+                            text-cargomii-navy
+                            tracking-tight
+                        "
+                    >
+                        Follow Up Customer
+                    </h2>
+
+
+                    <p
+                        class="
+                            text-sm
+                            text-slate-500
+                            mt-1.5
+                        "
+                    >
+                        Kirim SMS terlebih dahulu. WhatsApp dan Call bersifat opsional.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="
+                        bg-white
+                        rounded-2xl
+                        border
+                        border-slate-200
+                        shadow-card
+                        p-5
+                        lg:p-7
+                        max-w-4xl
+                    "
+                >
+
+
+                    <!-- CUSTOMER -->
+
+                    <div class="mb-5">
+
+                        <label
+                            class="
+                                block
+                                text-xs
+                                font-bold
+                                text-slate-600
+                                mb-2
+                            "
+                        >
+                            Pilih Customer
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="building-2"
+                                class="
+                                    absolute
+                                    left-3.5
+                                    top-1/2
+                                    -translate-y-1/2
+                                    w-4
+                                    h-4
+                                    text-slate-400
+                                    z-10
+                                "
+                            ></i>
+
+
+                            <select
+                                id="companySelect"
+                                class="
+                                    input-modern
+                                    appearance-none
+                                    w-full
+                                    border
+                                    border-slate-200
+                                    rounded-xl
+                                    pl-10
+                                    pr-10
+                                    py-3
+                                    text-sm
+                                    bg-slate-50
+                                    outline-none
+                                "
+                            >
+
+                                <option value="">
+                                    -- Pilih Customer --
+                                </option>
+
+                            </select>
+
+
+                            <i
+                                data-lucide="chevron-down"
+                                class="
+                                    absolute
+                                    right-3.5
+                                    top-1/2
+                                    -translate-y-1/2
+                                    w-4
+                                    h-4
+                                    text-slate-400
+                                    pointer-events-none
+                                "
+                            ></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TEMPLATE -->
+
+                    <div class="mb-5">
+
+                        <label
+                            class="
+                                block
+                                text-xs
+                                font-bold
+                                text-slate-600
+                                mb-2
+                            "
+                        >
+                            Template Follow Up
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="file-text"
+                                class="
+                                    absolute
+                                    left-3.5
+                                    top-1/2
+                                    -translate-y-1/2
+                                    w-4
+                                    h-4
+                                    text-slate-400
+                                    z-10
+                                "
+                            ></i>
+
+
+                            <select
+                                id="templateSelect"
+                                class="
+                                    input-modern
+                                    appearance-none
+                                    w-full
+                                    border
+                                    border-slate-200
+                                    rounded-xl
+                                    pl-10
+                                    pr-10
+                                    py-3
+                                    text-sm
+                                    bg-slate-50
+                                    outline-none
+                                "
+                            >
+
+                                <option value="first">
+                                    Follow Up Pertama
+                                </option>
+
+                                <option value="second">
+                                    Follow Up Kedua
+                                </option>
+
+                                <option value="offer">
+                                    Penawaran
+                                </option>
+
+                                <option value="reminder">
+                                    Reminder
+                                </option>
+
+                            </select>
+
+
+                            <i
+                                data-lucide="chevron-down"
+                                class="
+                                    absolute
+                                    right-3.5
+                                    top-1/2
+                                    -translate-y-1/2
+                                    w-4
+                                    h-4
+                                    text-slate-400
+                                    pointer-events-none
+                                "
+                            ></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CUSTOMER PHONE -->
+
+                    <div class="mb-5">
+
+                        <label
+                            class="
+                                block
+                                text-xs
+                                font-bold
+                                text-slate-600
+                                mb-2
+                            "
+                        >
+                            Nomor Customer
+                        </label>
+
+
+                        <div class="flex gap-2">
+
+
+                            <div class="relative flex-1">
+
+                                <i
+                                    data-lucide="phone"
+                                    class="
+                                        absolute
+                                        left-3.5
+                                        top-1/2
+                                        -translate-y-1/2
+                                        w-4
+                                        h-4
+                                        text-slate-400
+                                    "
+                                ></i>
+
+
+                                <input
+                                    id="customerPhone"
+                                    type="text"
+                                    readonly
+                                    placeholder="Nomor akan muncul di sini"
+                                    class="
+                                        w-full
+                                        bg-slate-100
+                                        border
+                                        border-slate-200
+                                        rounded-xl
+                                        pl-10
+                                        pr-4
+                                        py-3
+                                        text-sm
+                                        text-slate-600
+                                        outline-none
+                                    "
+                                >
+
+                            </div>
+
+
+                            <button
+                                id="copyPhoneBtn"
+                                type="button"
+                                class="
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    gap-2
+                                    px-4
+                                    sm:px-5
+                                    py-3
+                                    bg-slate-800
+                                    text-white
+                                    rounded-xl
+                                    hover:bg-cargomii-navy
+                                    font-bold
+                                    text-sm
+                                    whitespace-nowrap
+                                "
+                            >
+
+                                <i
+                                    data-lucide="copy"
+                                    class="w-4 h-4"
+                                ></i>
+
+
+                                <span class="hidden sm:inline">
+                                    Copy Nomor
+                                </span>
+
+
+                                <span class="sm:hidden">
+                                    Copy
+                                </span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="mb-6">
+
+                        <label
+                            class="
+                                block
+                                text-xs
+                                font-bold
+                                text-slate-600
+                                mb-2
+                            "
+                        >
+                            Pesan
+                        </label>
+
+
+                        <textarea
+                            id="message"
+                            rows="10"
+                            class="
+                                input-modern
+                                w-full
+                                border
+                                border-slate-200
+                                rounded-xl
+                                px-4
+                                py-3
+                                text-sm
+                                leading-relaxed
+                                bg-slate-50
+                                outline-none
+                                resize-y
+                            "
+                            placeholder="Pesan akan muncul di sini..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- ACTION TITLE -->
+                    <!-- ================================================= -->
+
+                    <div
+                        class="
+                            flex
+                            items-center
+                            gap-2
+                            mb-3
+                        "
+                    >
+
+                        <div
+                            class="
+                                w-7
+                                h-7
+                                rounded-lg
+                                bg-slate-100
+                                text-slate-600
+                                flex
+                                items-center
+                                justify-center
+                            "
+                        >
+
+                            <i
+                                data-lucide="send"
+                                class="w-3.5 h-3.5"
+                            ></i>
+
+                        </div>
+
+
+                        <p
+                            class="
+                                text-xs
+                                font-bold
+                                text-slate-700
+                            "
+                        >
+                            Pilih metode follow up
+                        </p>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- ACTION BUTTONS -->
+                    <!-- ================================================= -->
+
+                    <div
+                        class="
+                            grid
+                            sm:grid-cols-3
+                            gap-3
+                        "
+                    >
+
+
+                        <!-- SMS -->
+
+                        <button
+                            id="phoneLinkBtn"
+                            type="button"
+                            class="
+                                primary-btn
+                                group
+                                px-5
+                                py-4
+                                bg-cargomii-navy
+                                text-white
+                                rounded-xl
+                                hover:bg-cargomii-blue
+                                font-bold
+                                text-left
+                            "
+                        >
+
+                            <span
+                                class="
+                                    flex
+                                    items-center
+                                    gap-3
+                                "
+                            >
+
+                                <span
+                                    class="
+                                        w-10
+                                        h-10
+                                        rounded-lg
+                                        bg-white/10
+                                        flex
+                                        items-center
+                                        justify-center
+                                        flex-shrink-0
+                                    "
+                                >
+
+                                    <i
+                                        data-lucide="message-square-text"
+                                        class="w-[19px] h-[19px]"
+                                    ></i>
+
+                                </span>
+
+
+                                <span>
+
+                                    <span class="block text-sm">
+                                        SMS
+                                    </span>
+
+                                    <span
+                                        class="
+                                            block
+                                            text-[11px]
+                                            font-medium
+                                            text-white/55
+                                            mt-0.5
+                                        "
+                                    >
+                                        Wajib
+                                    </span>
+
+                                </span>
+
+                            </span>
+
+                        </button>
+
+
+                        <!-- WHATSAPP -->
+
+                        <button
+                            id="whatsappBtn"
+                            type="button"
+                            class="
+                                green-btn
+                                group
+                                px-5
+                                py-4
+                                bg-cargomii-green
+                                text-cargomii-navy
+                                rounded-xl
+                                hover:bg-[#3EAE17]
+                                font-bold
+                                text-left
+                            "
+                        >
+
+                            <span
+                                class="
+                                    flex
+                                    items-center
+                                    gap-3
+                                "
+                            >
+
+                                <span
+                                    class="
+                                        w-10
+                                        h-10
+                                        rounded-lg
+                                        bg-black/10
+                                        flex
+                                        items-center
+                                        justify-center
+                                        flex-shrink-0
+                                    "
+                                >
+
+                                    <i
+                                        data-lucide="message-circle"
+                                        class="w-[19px] h-[19px]"
+                                    ></i>
+
+                                </span>
+
+
+                                <span>
+
+                                    <span class="block text-sm">
+                                        WhatsApp
+                                    </span>
+
+                                    <span
+                                        class="
+                                            block
+                                            text-[11px]
+                                            font-medium
+                                            text-cargomii-navy/60
+                                            mt-0.5
+                                        "
+                                    >
+                                        Opsional
+                                    </span>
+
+                                </span>
+
+                            </span>
+
+                        </button>
+
+
+                        <!-- CALL -->
+
+                        <button
+                            id="callBtn"
+                            type="button"
+                            class="
+                                primary-btn
+                                group
+                                px-5
+                                py-4
+                                bg-cargomii-blue
+                                text-white
+                                rounded-xl
+                                hover:bg-cargomii-navy
+                                font-bold
+                                text-left
+                            "
+                        >
+
+                            <span
+                                class="
+                                    flex
+                                    items-center
+                                    gap-3
+                                "
+                            >
+
+                                <span
+                                    class="
+                                        w-10
+                                        h-10
+                                        rounded-lg
+                                        bg-white/10
+                                        flex
+                                        items-center
+                                        justify-center
+                                        flex-shrink-0
+                                    "
+                                >
+
+                                    <i
+                                        data-lucide="phone-call"
+                                        class="w-[19px] h-[19px]"
+                                    ></i>
+
+                                </span>
+
+
+                                <span>
+
+                                    <span class="block text-sm">
+                                        Call
+                                    </span>
+
+                                    <span
+                                        class="
+                                            block
+                                            text-[11px]
+                                            font-medium
+                                            text-white/55
+                                            mt-0.5
+                                        "
+                                    >
+                                        Opsional
+                                    </span>
+
+                                </span>
+
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- STATUS -->
+                    <!-- ================================================= -->
+
+                    <div
+                        id="followupStatus"
+                        class="
+                            mt-6
+                            pt-5
+                            border-t
+                            border-slate-100
+                            flex
+                            flex-wrap
+                            items-center
+                            gap-2
+                        "
+                    >
+
+                        <span
+                            class="
+                                text-xs
+                                font-bold
+                                text-slate-500
+                                mr-1
+                            "
+                        >
+                            Follow Up:
+                        </span>
+
+
+                        <span
+                            id="smsStatus"
+                            class="
+                                inline-flex
+                                items-center
+                                gap-1.5
+                                px-3
+                                py-1.5
+                                rounded-full
+                                bg-slate-100
+                                text-slate-500
+                                text-[11px]
+                                font-bold
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-slate-300
+                                "
+                            ></span>
+
+                            SMS
+
+                        </span>
+
+
+                        <span
+                            id="waStatus"
+                            class="
+                                inline-flex
+                                items-center
+                                gap-1.5
+                                px-3
+                                py-1.5
+                                rounded-full
+                                bg-slate-100
+                                text-slate-500
+                                text-[11px]
+                                font-bold
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-slate-300
+                                "
+                            ></span>
+
+                            WhatsApp
+
+                        </span>
+
+
+                        <span
+                            id="callStatus"
+                            class="
+                                inline-flex
+                                items-center
+                                gap-1.5
+                                px-3
+                                py-1.5
+                                rounded-full
+                                bg-slate-100
+                                text-slate-500
+                                text-[11px]
+                                font-bold
+                            "
+                        >
+
+                            <span
+                                class="
+                                    w-1.5
+                                    h-1.5
+                                    rounded-full
+                                    bg-slate-300
+                                "
+                            ></span>
+
+                            Call
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- PHONE STATUS -->
+                    <!-- ================================================= -->
+
+                    <div
+                        id="phoneLinkStatus"
+                        class="
+                            hidden
+                            mt-5
+                            p-4
+                            bg-blue-50
+                            border
+                            border-blue-100
+                            rounded-xl
+                            text-sm
+                            text-cargomii-navy
+                        "
+                    ></div>
+
+
+                    <!-- ================================================= -->
+                    <!-- INFO -->
+                    <!-- ================================================= -->
+
+                    <div
+                        class="
+                            mt-5
+                            p-4
+                            rounded-xl
+                            bg-slate-50
+                            border
+                            border-slate-100
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                items-start
+                                gap-3
+                            "
+                        >
+
+                            <div
+                                class="
+                                    w-8
+                                    h-8
+                                    rounded-lg
+                                    bg-white
+                                    border
+                                    border-slate-200
+                                    text-cargomii-blue
+                                    flex
+                                    items-center
+                                    justify-center
+                                    flex-shrink-0
+                                "
+                            >
+
+                                <i
+                                    data-lucide="info"
+                                    class="w-4 h-4"
+                                ></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <p
+                                    class="
+                                        font-bold
+                                        text-xs
+                                        text-slate-700
+                                        mb-1
+                                    "
+                                >
+                                    Cara penggunaan
+                                </p>
+
+
+                                <p
+                                    class="
+                                        text-xs
+                                        text-slate-500
+                                        leading-relaxed
+                                    "
+                                >
+                                    Pilih customer → pilih template → cek pesan → klik SMS.
+                                    SMS akan dibuka melalui aplikasi SMS / Phone Link.
+                                    WhatsApp dan Call bisa digunakan jika diperlukan.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ============================================================= -->
+<!-- TOAST -->
+<!-- ============================================================= -->
+
+<div
+    id="toast"
+    class="
+        fixed
+        bottom-5
+        right-5
+        z-50
+        bg-cargomii-navy
+        text-white
+        px-5
+        py-3
+        rounded-xl
+        shadow-lg
+        border
+        border-white/10
+        hidden
+    "
+>
+
+    <div class="flex items-center gap-2.5">
+
+        <div
+            class="
+                w-6
+                h-6
+                rounded-full
+                bg-cargomii-green
+                text-cargomii-navy
+                flex
+                items-center
+                justify-center
+            "
+        >
+
+            <i
+                data-lucide="check"
+                class="w-3.5 h-3.5"
+            ></i>
+
+        </div>
+
+
+        <span class="text-sm font-bold">
+            Berhasil!
+        </span>
+
+    </div>
+</div>
+
+
+<!-- ============================================================= -->
+<!-- LUCIDE INITIALIZE -->
+<!-- ============================================================= -->
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+<!-- ============================================================= -->
+<!-- EXISTING APP LOGIC
+     JANGAN DIUBAH
+============================================================= -->
+
+<script src="assets/app.js"></script>
+
+
+</body>
+</html>
